@@ -71,7 +71,8 @@ public abstract class HealthProfessional {
     public String toString() {
         return getProfessionalType() + " (ID: " + id + ")"
                 + formatDetail("Name", name)
-                + formatDetail("Working days", formatWorkingDays());
+                + formatDetail("Working days", formatWorkingDays())
+                + formatDetail("Services", describeServices());
     }
 
     protected static String formatDetail(String label, String value) {
@@ -79,10 +80,14 @@ public abstract class HealthProfessional {
     }
 
     protected static String requireText(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
+        if (isBlank(value)) {
             throw new IllegalArgumentException(fieldName + " must not be empty.");
         }
         return value.trim();
+    }
+
+    protected static boolean isBlank(String text) {
+        return text == null || text.trim().isEmpty();
     }
 
     private String formatWorkingDays() {
