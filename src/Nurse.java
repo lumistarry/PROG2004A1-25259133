@@ -51,3 +51,6 @@ public class Nurse extends HealthProfessional {
                 + formatDetail("Registration", registrationType);
     }
 }
+
+
+

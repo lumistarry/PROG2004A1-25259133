@@ -64,3 +64,6 @@ public class Appointment implements Comparable<Appointment> {
                 + "\n    Professional : " + professionalDetails;
     }
 }
+
+
+

@@ -45,3 +45,6 @@ public final class ClinicSchedule {
         return dayName.charAt(0) + dayName.substring(1).toLowerCase();
     }
 }
+
+
+

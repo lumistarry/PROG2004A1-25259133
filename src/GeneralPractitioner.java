@@ -52,3 +52,6 @@ public class GeneralPractitioner extends Doctor {
                 + formatDetail("Bulk billing", bulkBilling ? "Yes" : "No");
     }
 }
+
+
+

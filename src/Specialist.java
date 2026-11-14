@@ -64,3 +64,6 @@ public class Specialist extends Doctor {
                 + formatDetail("Referral required", referralRequired ? "Yes" : "No");
     }
 }
+
+
+

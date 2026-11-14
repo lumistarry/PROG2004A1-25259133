@@ -51,3 +51,6 @@ public class Dietitian extends HealthProfessional {
                 + formatDetail("Focus area", focusArea);
     }
 }
+
+
+

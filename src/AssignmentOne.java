@@ -101,6 +101,7 @@ public class AssignmentOne {
         System.out.println();
         System.out.println(sampleWithNurse);
 
+
         printSubheading("4.3 Comparing appointments by time (Comparable)");
         System.out.println("09:30 appointment compared with 10:00 appointment -> "
                 + sampleWithNurse.compareTo(sampleWithSpecialist) + " (negative = earlier)");
@@ -134,6 +135,8 @@ public class AssignmentOne {
         System.out.println("Bookings are for: " + ClinicSchedule.formatDay(manager.getBookingDay()));
         System.out.println("Clinic schedule : " + ClinicSchedule.describe());
 
+
+
         printSubheading("6.1 Adding appointments across all professional types");
         System.out.println(manager.addAppointment("Jack Taylor", "0412 345 678", gp1, LocalTime.of(9, 0)));
         System.out.println(manager.addAppointment("Oliver Brown", "0456789012", gp2, LocalTime.of(9, 0)));
@@ -147,6 +150,7 @@ public class AssignmentOne {
         System.out.println(manager.addAppointment("Mia Nguyen", "0423456789", gp1, LocalTime.of(13, 30)));
         System.out.println(manager.addAppointment(sampleWithSpecialist));
         System.out.println(manager.addAppointment(sampleWithNurse));
+
 
         printSubheading("6.2 Bookings that cannot be made");
         System.out.println("Double-booking a professional:");
@@ -168,6 +172,8 @@ public class AssignmentOne {
         System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", null, LocalTime.of(10, 0)));
         System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp2, null));
         System.out.println("  " + manager.addAppointment(null));
+
+
 
         printSubheading("6.3 Viewing all appointments (booking order, full details)");
         System.out.println(AppointmentManager.formatAppointments("All appointments",
@@ -239,3 +245,5 @@ public class AssignmentOne {
         System.out.println("-".repeat(title.length()));
     }
 }
+
+

@@ -25,3 +25,6 @@ public abstract class Doctor extends HealthProfessional {
                 + medication.trim() + " for " + patientName.trim() + ".";
     }
 }
+
+
+
