@@ -75,6 +75,24 @@ public abstract class HealthProfessional {
                 + formatDetail("Services", describeServices());
     }
 
+    // Two professionals are the same person when their IDs match.
+    @Override
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof HealthProfessional)) {
+            return false;
+        }
+        HealthProfessional other = (HealthProfessional) obj;
+        return id == other.id;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Integer.hashCode(id);
+    }
+
     protected static String formatDetail(String label, String value) {
         return String.format("\n  %-" + LABEL_WIDTH + "s: %s", label, value);
     }
@@ -93,8 +111,7 @@ public abstract class HealthProfessional {
     private String formatWorkingDays() {
         String result = "";
         for (int i = 0; i < workingDays.length; i++) {
-            String dayName = workingDays[i].toString();
-            result += dayName.charAt(0) + dayName.substring(1).toLowerCase();
+            result += ClinicSchedule.formatDay(workingDays[i]);
             if (i < workingDays.length - 1) {
                 result += ", ";
             }

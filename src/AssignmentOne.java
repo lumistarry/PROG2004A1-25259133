@@ -126,6 +126,97 @@ public class AssignmentOne {
         } catch (IllegalArgumentException e) {
             System.out.println("Not a time slot       -> " + e.getMessage());
         }
+
+        printHeading("Part 6 - Working with appointments");
+
+        // A fixed booking day keeps the output the same on every run.
+        AppointmentManager manager = new AppointmentManager(DayOfWeek.MONDAY);
+        System.out.println("Bookings are for: " + ClinicSchedule.formatDay(manager.getBookingDay()));
+        System.out.println("Clinic schedule : " + ClinicSchedule.describe());
+
+        printSubheading("6.1 Adding appointments across all professional types");
+        System.out.println(manager.addAppointment("Jack Taylor", "0412 345 678", gp1, LocalTime.of(9, 0)));
+        System.out.println(manager.addAppointment("Oliver Brown", "0456789012", gp2, LocalTime.of(9, 0)));
+        System.out.println(manager.addAppointment("Lucas Green", "0478901234", gp3, LocalTime.of(8, 0)));
+        System.out.println(manager.addAppointment("Ethan Lee", "0434567890", specialist1, LocalTime.of(11, 0)));
+        System.out.println(manager.addAppointment("Jack Taylor", "0412345678", specialist1, LocalTime.of(14, 0)));
+        System.out.println(manager.addAppointment("Sophie Clark", "0489012345", specialist2, LocalTime.of(12, 30)));
+        System.out.println(manager.addAppointment("Mia Nguyen", "0423456789", nurse1, LocalTime.of(8, 30)));
+        System.out.println(manager.addAppointment("Grace Hall", "0467890123", nurse2, LocalTime.of(15, 30)));
+        System.out.println(manager.addAppointment("Chloe Wang", "0445678901", dietitian2, LocalTime.of(10, 0)));
+        System.out.println(manager.addAppointment("Mia Nguyen", "0423456789", gp1, LocalTime.of(13, 30)));
+        System.out.println(manager.addAppointment(sampleWithSpecialist));
+        System.out.println(manager.addAppointment(sampleWithNurse));
+
+        printSubheading("6.2 Bookings that cannot be made");
+        System.out.println("Double-booking a professional:");
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp1, LocalTime.of(9, 0)));
+        HealthProfessional sameAsGp1 = new GeneralPractitioner(1001, "Dr Emily Chen", true);
+        System.out.println("  Is a new object with ID 1001 equal to gp1? " + sameAsGp1.equals(gp1));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", sameAsGp1, LocalTime.of(9, 0)));
+        System.out.println("Double-booking a patient:");
+        System.out.println("  " + manager.addAppointment("Jack Taylor", "0412345678", gp3, LocalTime.of(9, 0)));
+        System.out.println("Professional not working today:");
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", dietitian1, LocalTime.of(10, 0)));
+        System.out.println("Times that are not clinic slots:");
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp2, LocalTime.of(9, 15)));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp2, LocalTime.of(7, 30)));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp2, LocalTime.of(16, 0)));
+        System.out.println("Missing or invalid details:");
+        System.out.println("  " + manager.addAppointment("  ", "0491234567", gp2, LocalTime.of(10, 0)));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0391234567", gp2, LocalTime.of(10, 0)));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", null, LocalTime.of(10, 0)));
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp2, null));
+        System.out.println("  " + manager.addAppointment(null));
+
+        printSubheading("6.3 Viewing all appointments (booking order, full details)");
+        System.out.println(AppointmentManager.formatAppointments("All appointments",
+                manager.getAllAppointments()));
+
+        printSubheading("6.4 Sorting all appointments by time");
+        System.out.println(AppointmentManager.formatSummary("All appointments, earliest first",
+                manager.getAllAppointmentsSortedByTime()));
+
+        printSubheading("6.5 Filtering by health professional ID, then sorting the subset");
+        ArrayList<Appointment> cardiologyBookings =
+                manager.getAppointmentsByProfessionalId(specialist1.getId());
+        System.out.println(AppointmentManager.formatSummary(
+                "Professional ID " + specialist1.getId() + " (booking order)", cardiologyBookings));
+        System.out.println(AppointmentManager.formatSummary(
+                "Professional ID " + specialist1.getId() + " (sorted by time)",
+                AppointmentManager.sortByTime(cardiologyBookings)));
+        System.out.println(AppointmentManager.formatSummary("Professional ID 9999",
+                manager.getAppointmentsByProfessionalId(9999)));
+
+        printSubheading("6.6 Filtering by patient mobile number, then sorting the subset");
+        System.out.println(AppointmentManager.formatSummary("Mobile 0412345678 (sorted by time)",
+                AppointmentManager.sortByTime(manager.getAppointmentsByPatientMobile("0412345678"))));
+        System.out.println(AppointmentManager.formatSummary("Mobile '0423 456 789' (spaces ignored)",
+                AppointmentManager.sortByTime(manager.getAppointmentsByPatientMobile("0423 456 789"))));
+        System.out.println(AppointmentManager.formatSummary("Mobile 0499999999",
+                manager.getAppointmentsByPatientMobile("0499999999")));
+
+        printSubheading("6.7 Cancelling appointments");
+        System.out.println("By professional ID and time:");
+        System.out.println("  " + manager.cancelAppointment(gp1.getId(), LocalTime.of(9, 0)));
+        System.out.println("By patient mobile number:");
+        System.out.println("  " + manager.cancelAppointmentsByPatientMobile("0423456789"));
+        System.out.println("Appointments that do not exist:");
+        System.out.println("  " + manager.cancelAppointment(gp1.getId(), LocalTime.of(9, 0)));
+        System.out.println("  " + manager.cancelAppointment(specialist2.getId(), LocalTime.of(8, 0)));
+        System.out.println("  " + manager.cancelAppointmentsByPatientMobile("0400000000"));
+        System.out.println("  " + manager.cancelAppointmentsByPatientMobile("12345"));
+
+        printSubheading("6.8 Appointments after cancelling (sorted by time)");
+        System.out.println(AppointmentManager.formatSummary("Remaining appointments",
+                manager.getAllAppointmentsSortedByTime()));
+        System.out.println();
+        System.out.println("The freed 09:00 slot with " + gp1.getName() + " can now be booked again:");
+        System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", gp1, LocalTime.of(9, 0)));
+
+        printSubheading("6.9 Final list of appointments (sorted by time, full details)");
+        System.out.println(AppointmentManager.formatAppointments("Final appointments",
+                manager.getAllAppointmentsSortedByTime()));
     }
 
     private static void printProfessionals(ArrayList<HealthProfessional> professionals) {

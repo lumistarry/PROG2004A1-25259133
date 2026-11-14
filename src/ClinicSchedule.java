@@ -1,3 +1,4 @@
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -37,5 +38,10 @@ public final class ClinicSchedule {
     public static String describe() {
         return OPENING_TIME + " - " + CLOSING_TIME + ", " + SLOT_LENGTH_MINUTES
                 + "-minute slots (" + getTimeSlots().size() + " slots)";
+    }
+
+    public static String formatDay(DayOfWeek day) {
+        String dayName = day.toString();
+        return dayName.charAt(0) + dayName.substring(1).toLowerCase();
     }
 }
