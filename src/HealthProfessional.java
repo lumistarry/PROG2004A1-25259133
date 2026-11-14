@@ -76,7 +76,7 @@ public abstract class HealthProfessional {
     }
 
     protected static String formatDetail(String label, String value) {
-        return String.format("%n  %-" + LABEL_WIDTH + "s: %s", label, value);
+        return String.format("\n  %-" + LABEL_WIDTH + "s: %s", label, value);
     }
 
     protected static String requireText(String value, String fieldName) {

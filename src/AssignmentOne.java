@@ -1,4 +1,5 @@
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -84,6 +85,47 @@ public class AssignmentOne {
         System.out.println("Changing the returned array does not affect the object -> "
                 + dietitian1.getName() + " works on Sunday? " + dietitian1.worksOn(DayOfWeek.SUNDAY));
         System.out.println("Name of " + gp2.getId() + " is still: " + gp2.getName());
+
+        printHeading("Part 4 - Modelling an appointment");
+
+        printSubheading("4.1 The clinic's fixed daily schedule");
+        System.out.println("Schedule  : " + ClinicSchedule.describe());
+        System.out.println("Time slots: " + ClinicSchedule.getTimeSlots());
+
+        printSubheading("4.2 Creating appointments with different professional types");
+        Appointment sampleWithSpecialist = new Appointment("Jack Taylor", "0412 345 678",
+                specialist1, LocalTime.of(10, 0));
+        Patient mia = new Patient("Mia Nguyen", "0423456789");
+        Appointment sampleWithNurse = new Appointment(mia, nurse1, LocalTime.of(9, 30));
+        System.out.println(sampleWithSpecialist);
+        System.out.println();
+        System.out.println(sampleWithNurse);
+
+        printSubheading("4.3 Comparing appointments by time (Comparable)");
+        System.out.println("09:30 appointment compared with 10:00 appointment -> "
+                + sampleWithNurse.compareTo(sampleWithSpecialist) + " (negative = earlier)");
+
+        printSubheading("4.4 Incomplete or invalid appointments are rejected");
+        try {
+            new Appointment("", "0412345678", gp1, LocalTime.of(8, 0));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Missing patient name  -> " + e.getMessage());
+        }
+        try {
+            new Appointment("Ava Smith", "12345", gp1, LocalTime.of(8, 0));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid mobile number -> " + e.getMessage());
+        }
+        try {
+            new Appointment("Ava Smith", "0412345678", null, LocalTime.of(8, 0));
+        } catch (IllegalArgumentException e) {
+            System.out.println("No professional       -> " + e.getMessage());
+        }
+        try {
+            new Appointment("Ava Smith", "0412345678", gp1, LocalTime.of(9, 15));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Not a time slot       -> " + e.getMessage());
+        }
     }
 
     private static void printProfessionals(ArrayList<HealthProfessional> professionals) {
