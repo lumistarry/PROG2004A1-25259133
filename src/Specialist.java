@@ -1,10 +1,10 @@
 import java.time.DayOfWeek;
 
 /**
- * A specialist doctor, for example a cardiologist, who usually sees patients
- * only after a referral from a GP.
+ *A specialist doctor, for example a cardiologist, who usually sees patients
+ *only after a referral from a GP.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class Specialist extends Doctor {
 
@@ -18,21 +18,29 @@ public class Specialist extends Doctor {
         this.referralRequired = referralRequired;
     }
 
+
+
     public Specialist(int id, String name, DayOfWeek[] workingDays, String specialty) {
         this(id, name, workingDays, specialty, true);
     }
+
 
     public String getSpecialty() {
         return specialty;
     }
 
+
+
     public void setSpecialty(String specialty) {
         this.specialty = requireText(specialty, "Specialty");
     }
 
+
+
     public boolean isReferralRequired() {
         return referralRequired;
     }
+
 
     public void setReferralRequired(boolean referralRequired) {
         this.referralRequired = referralRequired;
@@ -46,16 +54,20 @@ public class Specialist extends Doctor {
                 + " for " + patientName.trim() + ".";
     }
 
+
+
     @Override
     public String getProfessionalType() {
         return "Specialist";
     }
+
 
     @Override
     public String describeServices() {
         return "Specialist " + specialty.toLowerCase() + " assessment and treatment"
                 + (referralRequired ? " (GP referral required)." : " (no referral needed).");
     }
+
 
     @Override
     public String toString() {

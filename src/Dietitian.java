@@ -1,9 +1,9 @@
 import java.time.DayOfWeek;
 
 /**
- * A dietitian, who gives nutrition advice and writes meal plans.
+ *A dietitian, who gives nutrition advice and writes meal plans.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class Dietitian extends HealthProfessional {
 

@@ -1,9 +1,9 @@
 import java.time.DayOfWeek;
 
 /**
- * A nurse, who takes blood samples and provides immunisations and wound care.
+ *A nurse, who takes blood samples and provides immunisations and wound care.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class Nurse extends HealthProfessional {
 

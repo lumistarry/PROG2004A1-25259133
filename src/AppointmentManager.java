@@ -93,7 +93,36 @@ public class AppointmentManager {
     }
 
     public ArrayList<Appointment> getAllAppointments() {
+        // Return a copy so callers cannot add or remove bookings directly.
         return new ArrayList<>(appointments);
+    }
+
+    /**
+     * Finds the slots that are free for one professional on the booking day.
+     * An empty result means that the professional does not work that day or
+     * that every clinic slot has already been booked.
+     */
+    public ArrayList<LocalTime> getAvailableTimeSlots(HealthProfessional professional) {
+        ArrayList<LocalTime> availableSlots = new ArrayList<>();
+        if (professional == null || !professional.worksOn(bookingDay)) {
+            return availableSlots;
+        }
+
+        // Check every clinic slot against the bookings already in the manager.
+        for (LocalTime slot : ClinicSchedule.getTimeSlots()) {
+            boolean alreadyBooked = false;
+            for (Appointment existing : appointments) {
+                if (existing.getTime().equals(slot)
+                        && existing.getProfessional().equals(professional)) {
+                    alreadyBooked = true;
+                    break;
+                }
+            }
+            if (!alreadyBooked) {
+                availableSlots.add(slot);
+            }
+        }
+        return availableSlots;
     }
 
     public ArrayList<Appointment> getAppointmentsByProfessionalId(int professionalId) {

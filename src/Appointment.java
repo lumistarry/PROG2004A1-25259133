@@ -1,19 +1,23 @@
 import java.time.LocalTime;
 
 /**
- * A single appointment for the current day, linking a patient to a chosen
- * health professional and a time slot.
+ *A single appointment for the current day, linking a patient to a chosen
+ *health professional and a time slot.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class Appointment implements Comparable<Appointment> {
 
+
     private final Patient patient;
-    // The general type, so an appointment works with any kind of professional.
+    //The general type, so an appointment works with any kind of professional.
     private final HealthProfessional professional;
     private final LocalTime time;
 
+
+
     public Appointment(Patient patient, HealthProfessional professional, LocalTime time) {
+        //Check all required values before assigning the immutable appointment fields.
         if (patient == null) {
             throw new IllegalArgumentException("An appointment needs a patient.");
         }
@@ -29,14 +33,18 @@ public class Appointment implements Comparable<Appointment> {
         this.time = time;
     }
 
+
     public Appointment(String patientName, String mobileNumber,
                        HealthProfessional professional, LocalTime time) {
         this(new Patient(patientName, mobileNumber), professional, time);
     }
 
+
+
     public Patient getPatient() {
         return patient;
     }
+
 
     public HealthProfessional getProfessional() {
         return professional;
@@ -50,11 +58,13 @@ public class Appointment implements Comparable<Appointment> {
         return time.plusMinutes(ClinicSchedule.SLOT_LENGTH_MINUTES);
     }
 
-    // LocalTime compares correctly, so a list of appointments sorts by time.
+    //LocalTime compares correctly, so a list of appointments sorts by time.
     @Override
     public int compareTo(Appointment other) {
         return time.compareTo(other.time);
     }
+
+
 
     @Override
     public String toString() {

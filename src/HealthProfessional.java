@@ -1,13 +1,14 @@
 import java.time.DayOfWeek;
 
 /**
- * Base class for every health professional. It holds the data that is common to
- * all of them, and is abstract so that a professional with no specialty can
- * never be created.
+ *Base class for every health professional. It holds the data that is common to
+ *all of them, and is abstract so that a professional with no specialty can
+ *never be created.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public abstract class HealthProfessional {
+
 
     private static final DayOfWeek[] DEFAULT_WORKING_DAYS = {
             DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
@@ -15,8 +16,11 @@ public abstract class HealthProfessional {
     };
 
     private static final int LABEL_WIDTH = 18;
+
+    //The numeric identity is immutable, while the display name can be updated safely.
     private final int id;
     private String name;
+    //This array is never shared directly; incoming and outgoing arrays are copied.
     private DayOfWeek[] workingDays;
 
     public HealthProfessional(int id, String name, DayOfWeek[] workingDays) {
@@ -29,7 +33,7 @@ public abstract class HealthProfessional {
     }
 
     public HealthProfessional(int id, String name) {
-        // No days were given, so use a standard Monday to Friday week.
+        //No days were given, so use a standard Monday to Friday week.
         this(id, name, DEFAULT_WORKING_DAYS);
     }
 
@@ -37,22 +41,26 @@ public abstract class HealthProfessional {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = requireText(name, "Name");
     }
 
-    // Hand out a copy, so the caller cannot change the stored days.
+    //Hand out a copy, so the caller cannot change the stored days.
     public DayOfWeek[] getWorkingDays() {
         return copyDays(workingDays);
     }
 
+
     public void setWorkingDays(DayOfWeek[] workingDays) {
         this.workingDays = validateAndCopyDays(workingDays);
     }
+
 
     public boolean worksOn(DayOfWeek day) {
         for (DayOfWeek workingDay : workingDays) {
@@ -75,7 +83,7 @@ public abstract class HealthProfessional {
                 + formatDetail("Services", describeServices());
     }
 
-    // Two professionals are the same person when their IDs match.
+    //Two professionals are the same person when their IDs match.
     @Override
     public final boolean equals(Object obj) {
         if (this == obj) {
@@ -97,6 +105,8 @@ public abstract class HealthProfessional {
         return String.format("\n  %-" + LABEL_WIDTH + "s: %s", label, value);
     }
 
+
+
     protected static String requireText(String value, String fieldName) {
         if (isBlank(value)) {
             throw new IllegalArgumentException(fieldName + " must not be empty.");
@@ -104,9 +114,12 @@ public abstract class HealthProfessional {
         return value.trim();
     }
 
+
+
     protected static boolean isBlank(String text) {
         return text == null || text.trim().isEmpty();
     }
+
 
     private String formatWorkingDays() {
         String result = "";
@@ -118,6 +131,8 @@ public abstract class HealthProfessional {
         }
         return result;
     }
+
+
 
     private static DayOfWeek[] validateAndCopyDays(DayOfWeek[] days) {
         if (days == null || days.length == 0) {
@@ -135,6 +150,7 @@ public abstract class HealthProfessional {
         }
         return copyDays(days);
     }
+
 
     private static DayOfWeek[] copyDays(DayOfWeek[] days) {
         DayOfWeek[] copy = new DayOfWeek[days.length];

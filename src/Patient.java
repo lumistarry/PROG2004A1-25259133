@@ -1,8 +1,8 @@
 /**
- * A patient who books appointments. Immutable, so the details of a patient can
- * never become invalid after the object is created.
+ *A patient who books appointments. Immutable, so the details of a patient can
+ *never become invalid after the object is created.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class Patient {
 
@@ -55,7 +55,7 @@ public class Patient {
         return true;
     }
 
-    // Ignore spaces, so "0412 345 678" and "0412345678" are one number.
+    //Ignore spaces, so "0412 345 678" and "0412345678" are one number.
     private static String normaliseMobileNumber(String mobileNumber) {
         return mobileNumber.replace(" ", "");
     }

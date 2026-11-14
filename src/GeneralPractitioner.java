@@ -1,10 +1,10 @@
 import java.time.DayOfWeek;
 
 /**
- * A general practitioner: general consultations, prescriptions and referrals
+ *A general practitioner: general consultations, prescriptions and referrals
  * to specialists.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class GeneralPractitioner extends Doctor {
 

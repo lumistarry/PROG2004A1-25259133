@@ -3,10 +3,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * Demonstrates the health service appointment system by creating objects and
- * exercising their behaviour.
+ *Demonstrates the health service appointment system by creating objects and
+ *exercising their behaviour.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class AssignmentOne {
 
@@ -38,7 +38,7 @@ public class AssignmentOne {
         Dietitian dietitian2 = new Dietitian(4002, "Noah Wilson",
                 new DayOfWeek[] {DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY});
 
-        // One list of the base type holds every kind of professional.
+        //One list of the base type holds every kind of professional.
         ArrayList<HealthProfessional> professionals = new ArrayList<>();
         professionals.add(gp1);
         professionals.add(gp2);
@@ -60,6 +60,8 @@ public class AssignmentOne {
         System.out.println(nurse1.takeBloodSample("Mia Nguyen"));
         System.out.println(dietitian1.createMealPlan("Mia Nguyen", "stable blood sugar levels"));
         System.out.println(gp3.issueReferral("", "dermatology"));
+
+
 
         printSubheading("3.3 Every kind of doctor can prescribe (inherited from Doctor)");
         ArrayList<Doctor> doctors = new ArrayList<>();
@@ -102,9 +104,13 @@ public class AssignmentOne {
         System.out.println(sampleWithNurse);
 
 
+
+
         printSubheading("4.3 Comparing appointments by time (Comparable)");
         System.out.println("09:30 appointment compared with 10:00 appointment -> "
                 + sampleWithNurse.compareTo(sampleWithSpecialist) + " (negative = earlier)");
+
+
 
         printSubheading("4.4 Incomplete or invalid appointments are rejected");
         try {
@@ -130,7 +136,7 @@ public class AssignmentOne {
 
         printHeading("Part 6 - Working with appointments");
 
-        // A fixed booking day keeps the output the same on every run.
+        //A fixed booking day keeps the output the same on every run
         AppointmentManager manager = new AppointmentManager(DayOfWeek.MONDAY);
         System.out.println("Bookings are for: " + ClinicSchedule.formatDay(manager.getBookingDay()));
         System.out.println("Clinic schedule : " + ClinicSchedule.describe());
@@ -150,6 +156,7 @@ public class AssignmentOne {
         System.out.println(manager.addAppointment("Mia Nguyen", "0423456789", gp1, LocalTime.of(13, 30)));
         System.out.println(manager.addAppointment(sampleWithSpecialist));
         System.out.println(manager.addAppointment(sampleWithNurse));
+
 
 
         printSubheading("6.2 Bookings that cannot be made");
@@ -225,6 +232,8 @@ public class AssignmentOne {
                 manager.getAllAppointmentsSortedByTime()));
     }
 
+
+
     private static void printProfessionals(ArrayList<HealthProfessional> professionals) {
         for (int i = 0; i < professionals.size(); i++) {
             System.out.println("[" + (i + 1) + "] " + professionals.get(i));
@@ -232,12 +241,15 @@ public class AssignmentOne {
         }
     }
 
+
+
     private static void printHeading(String title) {
         System.out.println();
         System.out.println("=".repeat(LINE_WIDTH));
         System.out.println(title);
         System.out.println("=".repeat(LINE_WIDTH));
     }
+
 
     private static void printSubheading(String title) {
         System.out.println();
