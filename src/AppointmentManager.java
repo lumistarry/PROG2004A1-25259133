@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Manages all of the appointments for one day: adding, filtering, sorting and
- * cancelling. Every operation reports back whether it succeeded.
+ *Manages all of the appointments for one day: adding, filtering, sorting and
+ *cancelling. Every operation reports back whether it succeeded.
  *
- * @author Shuo Lu (25259133)
+ *@author Shuo Lu (25259133)
  */
 public class AppointmentManager {
 
     public static final String SUCCESS = "SUCCESS: ";
     public static final String WARNING = "WARNING: ";
-    // An ArrayList suits a collection that grows and shrinks as bookings change.
+    //An ArrayList suits a collection that grows and shrinks as bookings change.
     private final ArrayList<Appointment> appointments;
     private final DayOfWeek bookingDay;
 
@@ -75,7 +75,7 @@ public class AppointmentManager {
         }
         for (Appointment existing : appointments) {
             if (existing.getTime().equals(time)) {
-                // equals() compares IDs, so this catches a double-booked professional.
+                //equals() compares IDs, so this catches a double-booked professional.
                 if (existing.getProfessional().equals(professional)) {
                     return WARNING + "Cannot book " + patient.getName() + ": "
                             + professional.getName() + " (ID " + professional.getId()
@@ -93,14 +93,14 @@ public class AppointmentManager {
     }
 
     public ArrayList<Appointment> getAllAppointments() {
-        // Return a copy so callers cannot add or remove bookings directly.
+        //Return a copy so callers cannot add or remove bookings directly.
         return new ArrayList<>(appointments);
     }
 
     /**
-     * Finds the slots that are free for one professional on the booking day.
-     * An empty result means that the professional does not work that day or
-     * that every clinic slot has already been booked.
+     *Finds the slots that are free for one professional on the booking day.
+     *An empty result means that the professional does not work that day or
+     *that every clinic slot has already been booked.
      */
     public ArrayList<LocalTime> getAvailableTimeSlots(HealthProfessional professional) {
         ArrayList<LocalTime> availableSlots = new ArrayList<>();
@@ -108,7 +108,7 @@ public class AppointmentManager {
             return availableSlots;
         }
 
-        // Check every clinic slot against the bookings already in the manager.
+        //Check every clinic slot against the bookings already in the manager.
         for (LocalTime slot : ClinicSchedule.getTimeSlots()) {
             boolean alreadyBooked = false;
             for (Appointment existing : appointments) {
@@ -149,7 +149,7 @@ public class AppointmentManager {
         return sortByTime(appointments);
     }
 
-    // Sort a copy, so this works on all appointments or on a filtered subset.
+    //Sort a copy, so this works on all appointments or on a filtered subset.
     public static ArrayList<Appointment> sortByTime(ArrayList<Appointment> list) {
         ArrayList<Appointment> sorted = new ArrayList<>(list);
         Collections.sort(sorted);
@@ -205,7 +205,7 @@ public class AppointmentManager {
             return WARNING + "Cannot cancel: '" + mobileNumber + "' is not a valid mobile number.";
         }
         int cancelled = 0;
-        // Work backwards, so removing an item does not skip the next one.
+        //Work backwards, so removing an item does not skip the next one.
         for (int i = appointments.size() - 1; i >= 0; i--) {
             if (appointments.get(i).getPatient().hasMobileNumber(mobileNumber)) {
                 appointments.remove(i);

@@ -148,6 +148,7 @@ public class AssignmentOne {
         System.out.println(manager.addAppointment("Oliver Brown", "0456789012", gp2, LocalTime.of(9, 0)));
         System.out.println(manager.addAppointment("Lucas Green", "0478901234", gp3, LocalTime.of(8, 0)));
         System.out.println(manager.addAppointment("Ethan Lee", "0434567890", specialist1, LocalTime.of(11, 0)));
+
         System.out.println(manager.addAppointment("Jack Taylor", "0412345678", specialist1, LocalTime.of(14, 0)));
         System.out.println(manager.addAppointment("Sophie Clark", "0489012345", specialist2, LocalTime.of(12, 30)));
         System.out.println(manager.addAppointment("Mia Nguyen", "0423456789", nurse1, LocalTime.of(8, 30)));
@@ -166,6 +167,8 @@ public class AssignmentOne {
         System.out.println("  Is a new object with ID 1001 equal to gp1? " + sameAsGp1.equals(gp1));
         System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", sameAsGp1, LocalTime.of(9, 0)));
         System.out.println("Double-booking a patient:");
+
+
         System.out.println("  " + manager.addAppointment("Jack Taylor", "0412345678", gp3, LocalTime.of(9, 0)));
         System.out.println("Professional not working today:");
         System.out.println("  " + manager.addAppointment("Ava Smith", "0491234567", dietitian1, LocalTime.of(10, 0)));
@@ -186,6 +189,7 @@ public class AssignmentOne {
         System.out.println(AppointmentManager.formatAppointments("All appointments",
                 manager.getAllAppointments()));
 
+
         printSubheading("6.4 Sorting all appointments by time");
         System.out.println(AppointmentManager.formatSummary("All appointments, earliest first",
                 manager.getAllAppointmentsSortedByTime()));
@@ -201,6 +205,7 @@ public class AssignmentOne {
         System.out.println(AppointmentManager.formatSummary("Professional ID 9999",
                 manager.getAppointmentsByProfessionalId(9999)));
 
+
         printSubheading("6.6 Filtering by patient mobile number, then sorting the subset");
         System.out.println(AppointmentManager.formatSummary("Mobile 0412345678 (sorted by time)",
                 AppointmentManager.sortByTime(manager.getAppointmentsByPatientMobile("0412345678"))));
@@ -208,6 +213,8 @@ public class AssignmentOne {
                 AppointmentManager.sortByTime(manager.getAppointmentsByPatientMobile("0423 456 789"))));
         System.out.println(AppointmentManager.formatSummary("Mobile 0499999999",
                 manager.getAppointmentsByPatientMobile("0499999999")));
+
+
 
         printSubheading("6.7 Cancelling appointments");
         System.out.println("By professional ID and time:");
@@ -219,6 +226,8 @@ public class AssignmentOne {
         System.out.println("  " + manager.cancelAppointment(specialist2.getId(), LocalTime.of(8, 0)));
         System.out.println("  " + manager.cancelAppointmentsByPatientMobile("0400000000"));
         System.out.println("  " + manager.cancelAppointmentsByPatientMobile("12345"));
+
+
 
         printSubheading("6.8 Appointments after cancelling (sorted by time)");
         System.out.println(AppointmentManager.formatSummary("Remaining appointments",
@@ -257,5 +266,13 @@ public class AssignmentOne {
         System.out.println("-".repeat(title.length()));
     }
 }
+
+
+
+
+
+
+
+
 
 
